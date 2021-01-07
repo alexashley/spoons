@@ -1,5 +1,5 @@
 local module = {
-    name = "keyboard",
+    name = "Keyboard",
     version = "0.1.0",
     author = "Alex Ashley",
     license = "MIT https://opensource.org/licenses/MIT",
@@ -7,33 +7,42 @@ local module = {
 }
 
 module.init = function()
-    module._logger = hs.logger.new(module.name, 'debug')
+    module._logger = hs.logger.new(string.lower(module.name), 'debug')
 
     module._logger.d('init')
 end
 
-local tellSystemEvents = function(message)
-    local systemEvents = "tell application \"System Events\" to keystroke "
-
-    return hs.osascript.applescript(systemEvents .. message)
-end
-
 module.type = function(line)
-    -- TODO: escape single/double quotes in line
-    -- TODO: wrap line in double quote
-    tellSystemEvents(line)
+    module._logger.d(line)
+    module._delay(5)
+    local escaped = "\"" .. string.gsub(line, "\"", "\\\"") .. "\""
+    module._tellSystemEvents(escaped)
 end
 
 module.typeLines = function(lines)
     for _, line in ipairs(lines) do
         module.type(line)
-        -- delay 1
-        tellSystemEvents("return")
+        module._delay(1)
+
+        module._tellSystemEvents("return")
     end
 end
 
 module.lockScreen = function()
-    tellSystemEvents("'q' using {control down, command down}")
+    module._tellSystemEvents("\"q\" using {control down, command down}")
+end
+
+module._runApplescript = function(script)
+    module._logger.d(script)
+    return hs.osascript.applescript(script)
+end
+
+module._tellSystemEvents = function(message)
+    return module._runApplescript("tell application \"System Events\" to keystroke " .. message)
+end
+
+module._delay = function(seconds)
+    module._runApplescript(string.format("delay %d", seconds))
 end
 
 return module

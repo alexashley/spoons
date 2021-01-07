@@ -3,7 +3,7 @@ tell application "Google Chrome"
     repeat with w in windows
         set i to 1
         repeat with t in tabs of w
-            if URL of t starts with $URL then
+            if URL of t starts with %s then
                 set active tab index of w to i
                 set index of w to 1
                 activate window w
