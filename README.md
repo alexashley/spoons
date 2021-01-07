@@ -1,3 +1,3 @@
 # spoons
 
-Some WIP spoons for [Hammerspoon](https://www.hammerspoon.org/).
+Assorted cutlery for use with [Hammerspoon](https://www.hammerspoon.org/).

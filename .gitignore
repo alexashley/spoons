@@ -1,1 +1,4 @@
 .idea/
+docs.json
+*.zip
+.DS_Store
