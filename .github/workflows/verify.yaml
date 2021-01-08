@@ -1,0 +1,14 @@
+name: verify
+
+on:
+  push:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    container: "gchr.io/alexashley/spoons/dev-tools:latest"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint
+        run: |
+          luacheck *.spoon

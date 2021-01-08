@@ -1,6 +1,6 @@
 MAKEFLAGS += --silent
 
-.PHONY: clean docs package
+.PHONY: clean docs lint package
 
 clean:
 	find . -type f -name '*.zip' -exec rm {} \;
@@ -8,6 +8,12 @@ clean:
 
 docs: clean
 	./hack/generate-docs.sh
+
+lint:
+	docker run -it --rm \
+		-v $$(pwd):/usr/src/app/spoons \
+		-w /usr/src/app/spoons \
+		ghcr.io/alexashley/spoons/dev-tools:latest luacheck *.spoon
 
 package: clean
 	./hack/package-spoons.sh
