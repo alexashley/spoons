@@ -1,0 +1,21 @@
+name: dev-tools
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get tag
+        id: tag
+        run: echo "::set-output name=sha::$(git rev-parse --short HEAD)"
+      - name: build-and-push
+        uses: docker/build-push-action@v1
+        with:
+          username: alexashley
+          password: ${{ secrets.GHCR_PAT }}
+          registry: ghcr.io
+          repository: alexashley/spoons/dev-tools
+          tags: "${{ steps.tag.outputs.sha }},latest"
