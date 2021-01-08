@@ -5,7 +5,7 @@ local module = {
     name = "Keyboard",
     version = "0.1.0",
     author = "Alex Ashley",
-    license = "MIT https://opensource.org/licenses/MIT",
+    license = "MIT - https://opensource.org/licenses/MIT",
     homepage = "https://github.com/alexashley/spoons"
 }
 
@@ -20,7 +20,6 @@ local module = {
 ---  * None
 module.init = function()
     module._logger = hs.logger.new(string.lower(module.name), 'debug')
-
     module._logger.d('init')
 end
 
@@ -53,7 +52,6 @@ module.typeLines = function(lines)
     for _, line in ipairs(lines) do
         module.type(line)
         module._delay(1)
-
         module._tellSystemEvents("return")
     end
 end

@@ -1,12 +1,12 @@
 MAKEFLAGS += --silent
 
-.PHONY: clean doc package
+.PHONY: clean docs package
 
 clean:
 	find . -type f -name '*.zip' -exec rm {} \;
 	find . -type f -name 'docs.json' -exec rm {} \;
 
-doc:
+docs: clean
 	./hack/generate-docs.sh
 
 package: clean
