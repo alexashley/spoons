@@ -2,7 +2,22 @@
 
 set -euo pipefail
 
-brew install --cask hammerspoon
+function installHammerspoon() {
+    brew install --cask hammerspoon
+    # enable AppleScript
+    defaults write org.hammerspoon.Hammerspoon HSAppleScriptEnabledKey 1
+
+    read -r -d '\0' installCli << EOF
+tell application "Hammerspoon"
+  execute lua code "hs.ipc.cliInstall(nil, true)"
+end tell
+\0
+EOF
+    # install the hs cli
+    osascript -l AppleScript -e "$installCli"
+}
+
+installHammerspoon
 make docs
 make package
 
