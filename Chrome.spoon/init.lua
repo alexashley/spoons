@@ -33,7 +33,7 @@ end
 ---
 --- Returns:
 ---  * None
-module.findTabByUri = function(uri)
+module.findTabByUri = function()
 end
 
 return module

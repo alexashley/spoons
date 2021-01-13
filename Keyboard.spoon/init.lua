@@ -44,7 +44,7 @@ end
 --- Type several lines of content into whatever window is currently active.
 ---
 --- Parameters:
----  * lines - A table of lines to type. Any double quotes will be escaped. Between each line is a brief delay and a return.
+---  * lines - A table of lines to type. Any double quotes will be escaped. Between each line is a delay and a return.
 ---
 --- Returns:
 ---  * None
