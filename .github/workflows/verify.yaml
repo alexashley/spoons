@@ -8,7 +8,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    container: "ghcr.io/alexashley/spoons/dev-tools:latest"
+    container: "ghcr.io/alexashley/spoons/dev-tools:1628232"
     steps:
       - uses: actions/checkout@v2
       - name: Lint
